@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🦸 Супергерой безопасности — 15 правил | Полный курс</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 40px;
+        }
+
+        header h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #FFD700;
+            color: #1a1a2e;
+            padding: 8px 20px;
+            border-radius: 40px;
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .progress-section {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 60px;
+            height: 40px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            height: 100%;
+            border-radius: 60px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            min-width: 50px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .star {
+            width: 50px;
+            height: 50px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            border: 3px solid #FFC107;
+            color: #b8860b;
+        }
+
+        .star.completed {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: white;
+            animation: starPulse 0.5s ease;
+            border-color: #FF8F00;
+        }
+
+        @keyframes starPulse {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .rules-container {
+            display: grid;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .rule-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .rule-card:nth-child(1) { animation-delay: 0.02s; }
+        .rule-card:nth-child(2) { animation-delay: 0.05s; }
+        .rule-card:nth-child(3) { animation-delay: 0.08s; }
+        .rule-card:nth-child(4) { animation-delay: 0.11s; }
+        .rule-card:nth-child(5) { animation-delay: 0.14s; }
+        .rule-card:nth-child(6) { animation-delay: 0.17s; }
+        .rule-card:nth-child(7) { animation-delay: 0.20s; }
+        .rule-card:nth-child(8) { animation-delay: 0.23s; }
+        .rule-card:nth-child(9) { animation-delay: 0.26s; }
+        .rule-card:nth-child(10) { animation-delay: 0.29s; }
+        .rule-card:nth-child(11) { animation-delay: 0.32s; }
+        .rule-card:nth-child(12) { animation-delay: 0.35s; }
+        .rule-card:nth-child(13) { animation-delay: 0.38s; }
+        .rule-card:nth-child(14) { animation-delay: 0.41s; }
+        .rule-card:nth-child(15) { animation-delay: 0.44s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .rule-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 55px rgba(0,0,0,0.3);
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px 30px;
+            border-bottom: 4px solid;
+        }
+
+        .rule-emoji {
+            font-size: 3.5em;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .rule-title-group h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .rule-title-group p {
+            font-size: 0.95em;
+            font-weight: 700;
+        }
+
+        .rule-image {
+            width: 100%;
+            height: auto;
+            max-height: 320px;
+            object-fit: contain;
+            background: linear-gradient(135deg, #f8f9fc 0%, #eef2f7 100%);
+            padding: 20px;
+        }
+
+        .rule-content {
+            padding: 25px 30px;
+        }
+
+        .situation-box {
+            background: #f5f7fc;
+            border-left: 6px solid;
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 20px;
+        }
+
+        .situation-box p {
+            font-size: 1.08em;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .question {
+            font-weight: 800;
+            font-size: 1.15em;
+            margin-bottom: 18px;
+            color: #1e2a3e;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            padding: 14px 22px;
+            border: 2px solid #e0e4e8;
+            border-radius: 60px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+            font-weight: 700;
+            text-align: left;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: #667eea;
+            background: #f0f2ff;
+            transform: translateX(6px);
+        }
+
+        .option-btn.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #2e7d32;
+        }
+
+        .option-btn.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #c62828;
+        }
+
+        .feedback {
+            padding: 14px 20px;
+            border-radius: 60px;
+            margin-bottom: 18px;
+            display: none;
+            font-weight: 700;
+            border-left: 5px solid;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.25s ease;
+        }
+
+        .feedback.correct {
+            background: #c8e6c9;
+            color: #1b5e20;
+            border-left-color: #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background: #ffcdd2;
+            color: #b71c1c;
+            border-left-color: #f44336;
+        }
+
+        .superpower {
+            background: linear-gradient(135deg, #FFF9C4, #FFECB3);
+            border-radius: 20px;
+            padding: 22px;
+            margin-top: 20px;
+            border-left: 6px solid #FFB300;
+        }
+
+        .superpower h4 {
+            color: #e65100;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .superpower ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .superpower li {
+            color: #5d4037;
+            padding: 8px 0;
+            padding-left: 32px;
+            position: relative;
+            line-height: 1.45;
+            font-weight: 600;
+        }
+
+        .superpower li:before {
+            content: "⭐";
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .tips {
+            background: white;
+            border-radius: 28px;
+            padding: 32px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .tips h3 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8em;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .tips p {
+            color: #2c3e2f;
+            line-height: 1.7;
+            margin-bottom: 14px;
+            font-size: 1.02em;
+        }
+
+        .tips strong {
+            color: #1b5e20;
+        }
+
+        @media (max-width: 680px) {
+            header h1 { font-size: 1.8em; }
+            .rule-header { flex-direction: column; text-align: center; }
+            .rule-title-group h2 { font-size: 1.4em; }
+            .star { width: 42px; height: 42px; font-size: 1.2em; }
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            border-radius: 2px;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        .finish-celebrate {
+            text-align: center;
+            background: gold;
+            padding: 15px;
+            border-radius: 60px;
+            margin-top: 15px;
+            font-weight: bold;
+            animation: glow 1s ease infinite;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px gold; }
+            100% { box-shadow: 0 0 25px orange; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🦸‍♂️ 15 правил супергероя 🦸‍♀️</h1>
+            <p>Безопасность — это сила! Выучи правила и получи суперзвезды</p>
+            <div class="badge">⭐ Полный курс безопасности ⭐</div>
+        </header>
+
+        <div class="progress-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%">
+                    <span id="progressText">0%</span>
+                </div>
+            </div>
+            <div class="stars" id="starsContainer"></div>
+            <div id="congratsMessage" style="text-align:center; margin-top:15px; font-weight:bold; color:#2e7d32;"></div>
+        </div>
+
+        <div class="rules-container" id="rulesContainer"></div>
+
+        <div class="tips">
+            <h3>💡 Советы для родителей</h3>
+            <p><strong>1. Регулярно обсуждайте:</strong> Поговорите с ребёнком о правилах безопасности несколько раз в неделю.</p>
+            <p><strong>2. Учите номера телефонов:</strong> Убедитесь, что ребёнок помнит ваш номер телефона.</p>
+            <p><strong>3. Практикуйте сценарии:</strong> Ролевые игры помогают ребёнку запомнить правила.</p>
+            <p><strong>4. Создавайте безопасную среду:</strong> Установите доверие, чтобы ребёнок мог рассказать вам о проблемах.</p>
+            <p><strong>5. Похвалите:</strong> Отмечайте, когда ребёнок правильно применяет правила безопасности.</p>
+            <p><strong>🏆 15 уроков — 15 звёзд:</strong> Каждое пройденное правило приносит ребёнку звезду и праздничный салют!</p>
+        </div>
+    </div>
+
+    <script>
+        // ==================== ВСЕ 15 ПРАВИЛ (ЧАСТЬ 1 + ЧАСТЬ 2) ====================
+        const rules = [
+            // ЧАСТЬ 1 — ПРАВИЛА 1-5
+            { id: 1, emoji: "🚶", title: "Чужие взрослые", subtitle: "Суперсила: Умею уходить!", color: "#1A237E", bgColor: "#E8EAF6", borderColor: "#3949AB", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470554599/C8x83niLz74d5Eamwjtmva/rule-stranger-ST7ETN6fi4eBeAUczGLHES.webp", situation: "К тебе подходит незнакомый дядя и говорит: «Помоги мне найти мою собачку!»", question: "Что ты сделаешь?", options: [ { text: "Пойду помогать искать собачку", correct: false, feedback: "Нет! Незнакомым взрослым не нужна помощь детей. Это может быть опасно!" }, { text: "Быстро уйду к своим взрослым и крикну «Я вас не знаю!»", correct: true, feedback: "Молодец! Ты настоящий супергерой! Всегда уходи к своим взрослым!" } ], superpower: "Суперсила: УЙТИ И КРИКНУТЬ!", steps: ["Повернись и быстро уходи к маме или папе", "Кричи: «Я вас не знаю!»", "Беги к другим людям (лучше к маме с ребёнком)", "Расскажи взрослым что случилось"] },
+            { id: 2, emoji: "🤫", title: "Секреты от мамы", subtitle: "Суперсила: Рассказываю маме!", color: "#E65100", bgColor: "#FFF3E0", borderColor: "#F57C00", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470554599/C8x83niLz74d5Eamwjtmva/rule-secret-4yRm7airQ38aSE6UH3DsdP.webp", situation: "Знакомый говорит тебе: «Давай это будет наш секрет, не говори маме!»", question: "Что ты сделаешь?", options: [ { text: "Соглашусь хранить секрет", correct: false, feedback: "Нет! Плохие секреты — это опасно! Всегда рассказывай маме и папе!" }, { text: "Сразу расскажу маме или папе!", correct: true, feedback: "Отлично! Хорошие секреты — это сюрпризы (подарки). Плохие — когда просят молчать!" } ], superpower: "Суперсила: РАССКАЗАТЬ МАМЕ!", steps: ["Хорошие секреты (подарок) — можно рассказать позже", "Плохие секреты (молчи!) — рассказывай СРАЗУ", "Иди к маме, папе или воспитателю", "Ты не предаёшь — ты защищаешь себя!"] },
+            { id: 3, emoji: "🗿", title: "Если потерялся", subtitle: "Суперсила: Стою столбиком!", color: "#1B5E20", bgColor: "#E8F5E9", borderColor: "#388E3C", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470554599/C8x83niLz74d5Eamwjtmva/rule-lost-edkzRDoCM8kvXPAsKPuNwc.webp", situation: "Ты в магазине и вдруг не видишь маму рядом. Ты потерялся!", question: "Что ты сделаешь?", options: [ { text: "Побегу искать маму по всему магазину", correct: false, feedback: "Нет! Если побежишь — мама не найдёт тебя на месте. Стой как столбик!" }, { text: "Остановлюсь на месте и громко крикну «Мама! Папа!»", correct: true, feedback: "Супер! Стой на месте как столбик! Мама вернётся туда, где ты был!" } ], superpower: "Суперсила: СТОЯТЬ СТОЛБИКОМ!", steps: ["Остановись на месте — не беги!", "Кричи: «Мама! Папа!» 3 раза громко", "Если не приходят — подойди к тёте с ребёнком", "Скажи: «Я потерялся, помогите!»"] },
+            { id: 4, emoji: "🍬", title: "Чужое угощение", subtitle: "Суперсила: Говорю НЕТ!", color: "#880E4F", bgColor: "#FCE4EC", borderColor: "#C2185B", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470554599/C8x83niLz74d5Eamwjtmva/rule-secret-4yRm7airQ38aSE6UH3DsdP.webp", situation: "Незнакомый человек протягивает тебе конфету и говорит: «Это наш секрет!»", question: "Что ты сделаешь?", options: [ { text: "Возьму конфету, она выглядит вкусно!", correct: false, feedback: "Нет! Никогда не бери еду от незнакомых! Это может быть опасно!" }, { text: "Отступлю на 3 шага и громко скажу «НЕТ!», потом убегу к своим", correct: true, feedback: "Молодец! Ты самый смелый! Говорить НЕТ — это твоя суперсила!" } ], superpower: "Суперсила: СКАЗАТЬ НЕТ!", steps: ["Отойди на 3 шага назад", "Громко скажи: «НЕТ!»", "Быстро беги к своему взрослому", "Расскажи маме или папе что случилось"] },
+            { id: 5, emoji: "🏃", title: "Кричи и убегай", subtitle: "Суперсила: Кричу и бегу!", color: "#B71C1C", bgColor: "#FFEBEE", borderColor: "#D32F2F", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663470554599/C8x83niLz74d5Eamwjtmva/rule-run-gKGwTmuXwgyCnG4t4opvcV.webp", situation: "Тебе страшно — кто-то пытается взять тебя за руку и куда-то вести!", question: "Что ты сделаешь?", options: [ { text: "Буду молчать, чтобы не быть невежливым", correct: false, feedback: "Нет! Когда страшно — кричи! Быть невежливым — не страшно, когда ты в опасности!" }, { text: "Громко кричу «Помогите! Я не знаю этого человека!» и убегаю!", correct: true, feedback: "Браво! Ты настоящий супергерой безопасности! Кричать — это правильно!" } ], superpower: "Суперсила: КРИЧАТЬ И БЕЖАТЬ!", steps: ["Кричи: «Помогите! Я не знаю этого человека!»", "Убегай в безопасное место (магазин, к людям)", "Не бойся быть «невежливым» — твоя безопасность важнее!", "Расскажи взрослым что произошло"] },
+            
+            // ЧАСТЬ 2 — ПРАВИЛА 6-15
+            { id: 6, emoji: "🔌", title: "Розетки и провода", subtitle: "Суперсила: Знаю, что опасно!", color: "#FF6F00", bgColor: "#FFF3E0", borderColor: "#FFB300", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule1_hero_7dea55d6.png", situation: "Ты видишь розетку или провод. Тебе интересно, что внутри.", question: "Что ты сделаешь?", options: [ { text: "Попробую засунуть палец или игрушку в розетку", correct: false, feedback: "Нет! Электричество очень опасно! Оно может сильно ударить!" }, { text: "Не буду трогать розетку и провода, это только для взрослых", correct: true, feedback: "Правильно! Розетки — это не игрушки. Ты молодец!" } ], superpower: "Суперсила: НЕ ТРОГАТЬ РОЗЕТКИ!", steps: ["Никогда не суй ничего в розетку", "Не тяни за провода", "Если провод искрит — отойди и позови взрослых", "Помни: ток невидимый, но очень больно бьёт!"] },
+            { id: 7, emoji: "🚪", title: "Чужой за дверью", subtitle: "Суперсила: Дверь не открываю!", color: "#424242", bgColor: "#F5F5F5", borderColor: "#616161", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule2_hero_5bb045e4.png", situation: "Кто-то звонит в дверь, а мамы или папы нет рядом.", question: "Что ты сделаешь?", options: [ { text: "Открою дверь, чтобы посмотреть, кто пришел", correct: false, feedback: "Нет! Открывать дверь чужим опасно!" }, { text: "Не буду открывать и позову маму или папу", correct: true, feedback: "Верно! Дверь открывают только взрослые. Ты в безопасности!" } ], superpower: "Суперсила: НЕ ОТКРЫВАТЬ ЧУЖИМ!", steps: ["Если звонят в дверь — не подходи", "Никогда не открывай дверь незнакомым", "Даже если говорят, что они от мамы или папы", "Тихо позови взрослых из другой комнаты"] },
+            { id: 8, emoji: "🔥", title: "Горячее — опасно", subtitle: "Суперсила: Знаю, что горячо!", color: "#D32F2F", bgColor: "#FFEBEE", borderColor: "#E57373", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule3_hero_f1f1f7a7.png", situation: "На плите стоит горячая кастрюля, а мама отвернулась.", question: "Что ты сделаешь?", options: [ { text: "Попробую потрогать кастрюлю, чтобы узнать, какая она горячая", correct: false, feedback: "Нет! Горячее может оставить очень больные ожоги!" }, { text: "Отойду подальше и не буду трогать плиту и чайник", correct: true, feedback: "Да! Горячие предметы опасны. Умница!" } ], superpower: "Суперсила: ОСТОРОЖНО, ГОРЯЧО!", steps: ["Не подходи к включенной плите", "Не трогай горячий чайник или утюг", "Если что-то упало на плиту — не доставай сам", "Помни: ожог лечится очень долго и больно!"] },
+            { id: 9, emoji: "🚦", title: "Переход дороги", subtitle: "Суперсила: Перехожу правильно!", color: "#388E3C", bgColor: "#E8F5E9", borderColor: "#66BB6A", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule5_hero_1c985ffc.png", situation: "Вы с мамой подошли к дороге, а светофор горит красным.", question: "Что ты сделаешь?", options: [ { text: "Побегу через дорогу, ведь машин пока нет", correct: false, feedback: "Нет! Переходить дорогу можно только на зеленый свет!" }, { text: "Буду стоять и ждать, пока загорится зеленый человечек", correct: true, feedback: "Точно! Зеленый свет — путь открыт. Ты очень внимательный!" } ], superpower: "Суперсила: СТОЙ И ЖДИ!", steps: ["Красный свет — стой на месте", "Жёлтый свет — приготовься", "Зелёный свет — можно идти", "Всегда держи маму или папу за руку!"] },
+            { id: 10, emoji: "✋", title: "Моё тело — моё!", subtitle: "Суперсила: Мои правила!", color: "#AD1457", bgColor: "#FCE4EC", borderColor: "#EC407A", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule4_hero_c1d9e600.png", situation: "Кто-то пытается тебя потрогать так, как тебе не нравится.", question: "Что ты сделаешь?", options: [ { text: "Буду молчать, чтобы не обидеть человека", correct: false, feedback: "Нет! Твое тело принадлежит только тебе!" }, { text: "Громко скажу 'НЕТ, МНЕ ЭТО НЕ НРАВИТСЯ' и уйду к маме", correct: true, feedback: "Браво! Ты имеешь право защищать себя. Ты настоящий герой!" } ], superpower: "Суперсила: СКАЗАТЬ НЕТ!", steps: ["Твоё тело — только твоё", "Никто не должен трогать тебя без разрешения", "Если тебе неприятно — громко скажи 'НЕТ!'", "Сразу расскажи маме или папе, что случилось"] },
+            { id: 11, emoji: "🛒", title: "На улице с мамой", subtitle: "Суперсила: Не теряюсь!", color: "#1976D2", bgColor: "#E3F2FD", borderColor: "#64B5F6", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule6_hero_432f823e.png", situation: "Вы в большом магазине, и тебе очень хочется посмотреть интересную игрушку, которая далеко.", question: "Что ты сделаешь?", options: [ { text: "Побегу к игрушке, ведь мама рядом", correct: false, feedback: "Нет! В больших местах легко потеряться, если убежать далеко!" }, { text: "Возьму маму за руку и попрошу пойти посмотреть вместе", correct: true, feedback: "Верно! Всегда будь рядом с родителями. Ты молодец!" } ], superpower: "Суперсила: НЕ ТЕРЯЮСЬ!", steps: ["В магазине или парке всегда держи маму за руку", "Не убегай далеко, даже если видишь маму", "Если потерялся — стой на месте и кричи", "Помни: мама вернётся туда, где ты был в последний раз"] },
+            { id: 12, emoji: "💧", title: "Вода без взрослых", subtitle: "Суперсила: В воду со взрослыми!", color: "#0288D1", bgColor: "#E1F5FE", borderColor: "#4FC3F7", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule7_hero_9640358c.png", situation: "Ты на берегу речки, и твоя любимая игрушка уплыла недалеко.", question: "Что ты сделаешь?", options: [ { text: "Побегу в воду, чтобы достать игрушку", correct: false, feedback: "Нет! Вода может быть глубокой и опасной!" }, { text: "Позову маму или папу, чтобы они помогли достать игрушку", correct: true, feedback: "Правильно! К воде без взрослых подходить нельзя!" } ], superpower: "Суперсила: В ВОДУ СО ВЗРОСЛЫМИ!", steps: ["Никогда не подходи к воде один", "Даже если видишь, что мелко — всегда нужен взрослый", "Вода может быть холодной и опасной", "Помни: игрушка не важнее, чем твоя жизнь!"] },
+            { id: 13, emoji: "🏊", title: "Проверяю дно", subtitle: "Суперсила: Проверяю дно!", color: "#0097A7", bgColor: "#E0F7FA", borderColor: "#4DD0E1", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule8_hero_0ccb09a1.png", situation: "Вы пришли на новое место у воды, и тебе хочется сразу прыгнуть в воду.", question: "Что ты сделаешь?", options: [ { text: "Сразу прыгну в воду, ведь там весело", correct: false, feedback: "Нет! На дне могут быть камни или ямы, можно сильно удариться!" }, { text: "Сначала зайду осторожно вместе с папой и проверю дно", correct: true, feedback: "Да! Сначала нужно проверить, безопасно ли там. Ты очень умный!" } ], superpower: "Суперсила: ПРОВЕРЯЮ ДНО!", steps: ["На новом месте никогда не прыгай сразу", "Сначала зайди медленно и проверь дно", "Может быть яма, камни или коряги", "Всегда слушай взрослых — они знают, где безопасно"] },
+            { id: 14, emoji: "🔥", title: "Спички и зажигалки", subtitle: "Суперсила: Огонь не трогаю!", color: "#BF360C", bgColor: "#FBE9E7", borderColor: "#FF7043", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule9_hero_2037d04c.png", situation: "Ты нашел спички или зажигалку на столе.", question: "Что ты сделаешь?", options: [ { text: "Попробую зажечь спичку или зажигалку, чтобы посмотреть на огонь", correct: false, feedback: "Нет! Огонь очень опасен и может сжечь все вокруг!" }, { text: "Не буду трогать и сразу скажу взрослым, что нашел их", correct: true, feedback: "Супер! Спички — это не для детей. Ты настоящий герой!" } ], superpower: "Суперсила: ОГОНЬ НЕ ТРОГАЮ!", steps: ["Никогда не трогай спички и зажигалки", "Огонь может сжечь твои руки и дом", "Если видишь огонь — зови взрослых", "Помни: огонь — это не игрушка, это очень опасно!"] },
+            { id: 15, emoji: "🤐", title: "Никаких секретов", subtitle: "Суперсила: Секретов нет!", color: "#6A1B9A", bgColor: "#F3E5F5", borderColor: "#BA68C8", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663478435433/ZsVxn3HXagUs6Vac9hVMdH/rule10_hero_2219916d.png", situation: "Знакомый взрослый просит тебя сохранить секрет о том, что он тебя трогал.", question: "Что ты сделаешь?", options: [ { text: "Сохраню секрет, ведь это знакомый взрослый", correct: false, feedback: "Нет! Это очень плохой секрет, который может быть опасен!" }, { text: "Сразу пойду и все расскажу маме или папе", correct: true, feedback: "Правильно! О таких вещах нельзя молчать. Мы всегда тебя защитим!" } ], superpower: "Суперсила: РАССКАЗЫВАЮ МАМЕ!", steps: ["Хорошие секреты — это сюрпризы (подарки)", "Плохие секреты — когда просят молчать о теле", "Если взрослый просит молчать — это плохой секрет", "Всегда рассказывай маме, папе или воспитателю!"] }
+        ];
+
+        let progress = {};
+
+        function init() {
+            for (let i = 1; i <= 15; i++) {
+                const saved = localStorage.getItem(`rule_full_${i}`);
+                progress[i] = saved === 'true';
+            }
+            renderRules();
+            updateProgress();
+            createStars();
+            showFinishMessage();
+        }
+
+        function renderRules() {
+            const container = document.getElementById('rulesContainer');
+            container.innerHTML = rules.map(rule => `
+                <div class="rule-card">
+                    <div class="rule-header" style="background-color: ${rule.bgColor}; border-bottom-color: ${rule.borderColor};">
+                        <div class="rule-emoji">${rule.emoji}</div>
+                        <div class="rule-title-group">
+                            <h2 style="color: ${rule.color};">${rule.id}. ${rule.title}</h2>
+                            <p style="color: ${rule.borderColor};">${rule.subtitle}</p>
+                        </div>
+                    </div>
+                    <img src="${rule.image}" alt="${rule.title}" class="rule-image" loading="lazy" onerror="this.style.display='none'">
+                    <div class="rule-content">
+                        <div class="situation-box" style="border-left-color: ${rule.borderColor}; background-color: ${rule.bgColor};">
+                            <p>📖 ${rule.situation}</p>
+                            <p class="question">❓ ${rule.question}</p>
+                            <div class="options">
+                                ${rule.options.map((opt, idx) => `<button class="option-btn" data-rule="${rule.id}" data-opt="${idx}">${opt.text}</button>`).join('')}
+                            </div>
+                        </div>
+                        <div class="feedback" id="feedback-${rule.id}"></div>
+                        <div class="superpower">
+                            <h4>🦸 ${rule.superpower}</h4>
+                            <ul>
+                                ${rule.steps.map(step => `<li>${step}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // привязываем события
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                const ruleId = parseInt(btn.dataset.rule);
+                const optIdx = parseInt(btn.dataset.opt);
+                btn.addEventListener('click', () => checkAnswer(ruleId, optIdx, btn));
+                if (progress[ruleId]) {
+                    btn.disabled = true;
+                    btn.style.opacity = '0.6';
+                }
+            });
+        }
+
+        function checkAnswer(ruleId, optionIdx, btn) {
+            if (progress[ruleId]) return;
+            const rule = rules.find(r => r.id === ruleId);
+            if (!rule) return;
+            const isCorrect = rule.options[optionIdx].correct;
+            const feedbackDiv = document.getElementById(`feedback-${ruleId}`);
+            
+            feedbackDiv.classList.add('show');
+            if (isCorrect) {
+                feedbackDiv.classList.add('correct');
+                feedbackDiv.innerHTML = '✅ ' + rule.options[optionIdx].feedback;
+                btn.classList.add('correct');
+                playSound('correct');
+                progress[ruleId] = true;
+                localStorage.setItem(`rule_full_${ruleId}`, 'true');
+                updateProgress();
+                createStars();
+                createConfetti();
+                showFinishMessage();
+                
+                // блокируем все кнопки этого правила
+                document.querySelectorAll(`.option-btn[data-rule="${ruleId}"]`).forEach(b => {
+                    b.disabled = true;
+                    b.style.opacity = '0.6';
+                });
+            } else {
+                feedbackDiv.classList.add('incorrect');
+                feedbackDiv.innerHTML = '❌ ' + rule.options[optionIdx].feedback;
+                btn.classList.add('incorrect');
+                playSound('incorrect');
+                setTimeout(() => {
+                    feedbackDiv.classList.remove('show', 'incorrect');
+                }, 1500);
+            }
+        }
+
+        function updateProgress() {
+            const completed = Object.values(progress).filter(v => v === true).length;
+            const percentage = Math.round((completed / 15) * 100);
+            const fill = document.getElementById('progressFill');
+            fill.style.width = percentage + '%';
+            document.getElementById('progressText').textContent = percentage + '%';
+        }
+
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            container.innerHTML = '';
+            for (let i = 1; i <= 15; i++) {
+                const starDiv = document.createElement('div');
+                starDiv.className = 'star' + (progress[i] ? ' completed' : '');
+                starDiv.textContent = i;
+                container.appendChild(starDiv);
+            }
+        }
+        
+        function showFinishMessage() {
+            const completedTotal = Object.values(progress).filter(v => v === true).length;
+            const msgDiv = document.getElementById('congratsMessage');
+            if (completedTotal === 15) {
+                msgDiv.innerHTML = '🎉✨ ПОЗДРАВЛЯЕМ! Ты настоящий СУПЕРГЕРОЙ безопасности! Все 15 звёзд собраны! ✨🎉';
+                msgDiv.classList.add('finish-celebrate');
+                createBigConfetti();
+            } else {
+                msgDiv.innerHTML = `⭐ Осталось изучить ${15 - completedTotal} правил. Будь супергероем! ⭐`;
+                msgDiv.classList.remove('finish-celebrate');
+            }
+        }
+        
+        function createBigConfetti() {
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => createConfetti(), i * 30);
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 25; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.style.left = Math.random() * 100 + '%';
+                conf.style.top = '-20px';
+                conf.style.width = (6 + Math.random() * 12) + 'px';
+                conf.style.height = (6 + Math.random() * 12) + 'px';
+                conf.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+                conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                conf.style.animation = `confetti-fall ${1.5 + Math.random() * 2}s linear forwards`;
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 3000);
+            }
+        }
+
+        function playSound(type) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                if (type === 'correct') {
+                    osc.frequency.value = 880;
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+                } else {
+                    osc.frequency.value = 440;
+                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.2);
+                }
+            } catch(e) { console.log("audio error"); }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
