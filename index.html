@@ -451,8 +451,7 @@
 
         function init() {
             for (let i = 1; i <= 15; i++) {
-                const saved = localStorage.getItem(`rule_full_${i}`);
-                progress[i] = saved === 'true';
+                progress[i] = false;
             }
             renderRules();
             updateProgress();
@@ -517,7 +516,6 @@
                 btn.classList.add('correct');
                 playSound('correct');
                 progress[ruleId] = true;
-                localStorage.setItem(`rule_full_${ruleId}`, 'true');
                 updateProgress();
                 createStars();
                 createConfetti();
