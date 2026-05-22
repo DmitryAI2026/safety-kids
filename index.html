@@ -391,9 +391,147 @@
             0% { box-shadow: 0 0 5px gold; }
             100% { box-shadow: 0 0 25px orange; }
         }
+
+        /* Экран ввода имени */
+        #nameScreen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .name-card {
+            background: white;
+            border-radius: 32px;
+            padding: 48px 40px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .name-card .hero-emoji {
+            font-size: 5em;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .name-card h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.9em;
+            color: #1a237e;
+            margin-bottom: 8px;
+        }
+        .name-card p {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 28px;
+        }
+        .name-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 3px solid #e0e4e8;
+            border-radius: 60px;
+            font-size: 1.2em;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .name-input:focus { border-color: #3949AB; }
+        .name-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #1a237e, #3949AB);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.2em;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .name-btn:hover { transform: scale(1.03); opacity: 0.95; }
+
+        /* Оверлей правильного ответа */
+        .rule-card { position: relative; }
+        .answer-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.93);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 28px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .answer-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .answer-overlay img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+        }
+        .answer-overlay .overlay-text {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.6em;
+            color: #2e7d32;
+            margin-top: 16px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        @keyframes overlayPop {
+            0%   { transform: scale(0.4) translateY(40px); opacity: 0; }
+            60%  { transform: scale(1.15) translateY(-10px); opacity: 1; }
+            80%  { transform: scale(0.95) translateY(4px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        .answer-overlay.show img {
+            animation: overlayPop 0.65s ease forwards;
+        }
+
+        /* Кнопка начать заново */
+        .restart-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 18px 48px;
+            background: linear-gradient(135deg, #1a237e, #3949AB);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-size: 1.3em;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .restart-btn:hover { transform: scale(1.04); opacity: 0.95; }
     </style>
 </head>
 <body>
+    <!-- Экран ввода имени -->
+    <div id="nameScreen">
+        <div class="name-card">
+            <span class="hero-emoji">🦸‍♂️</span>
+            <h2>Привет, будущий супергерой!</h2>
+            <p>Как зовут твоего ребёнка?</p>
+            <input class="name-input" id="nameInput" type="text" placeholder="Введите имя..." maxlength="30">
+            <button class="name-btn" onclick="startGame()">🚀 Начать обучение!</button>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <h1>🦸‍♂️ 15 правил супергероя 🦸‍♀️</h1>
@@ -422,6 +560,7 @@
             <p><strong>5. Похвалите:</strong> Отмечайте, когда ребёнок правильно применяет правила безопасности.</p>
             <p><strong>🏆 15 уроков — 15 звёзд:</strong> Каждое пройденное правило приносит ребёнку звезду и праздничный салют!</p>
         </div>
+        <button class="restart-btn" onclick="restartGame()">🔄 Начать заново</button>
     </div>
 
     <script>
@@ -448,6 +587,25 @@
         ];
 
         let progress = {};
+        let childName = '';
+
+        function startGame() {
+            const input = document.getElementById('nameInput').value.trim();
+            childName = input || 'Супергерой';
+            document.getElementById('nameScreen').style.display = 'none';
+            init();
+        }
+
+        function restartGame() {
+            for (let i = 1; i <= 15; i++) {
+                progress[i] = false;
+            }
+            renderRules();
+            updateProgress();
+            createStars();
+            showFinishMessage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function init() {
             for (let i = 1; i <= 15; i++) {
@@ -463,6 +621,10 @@
             const container = document.getElementById('rulesContainer');
             container.innerHTML = rules.map(rule => `
                 <div class="rule-card">
+                    <div class="answer-overlay" id="overlay-${rule.id}">
+                        <img src="${rule.image}" alt="${rule.title}" onerror="this.style.display='none'">
+                        <div class="overlay-text">🎉 ${rule.options.find(o=>o.correct).feedback}</div>
+                    </div>
                     <div class="rule-header" style="background-color: ${rule.bgColor}; border-bottom-color: ${rule.borderColor};">
                         <div class="rule-emoji">${rule.emoji}</div>
                         <div class="rule-title-group">
@@ -516,6 +678,12 @@
                 btn.classList.add('correct');
                 playSound('correct');
                 progress[ruleId] = true;
+                // показываем оверлей
+                const ov = document.getElementById(`overlay-${ruleId}`);
+                if (ov) {
+                    ov.classList.add('show');
+                    setTimeout(() => ov.classList.remove('show'), 2200);
+                }
                 updateProgress();
                 createStars();
                 createConfetti();
@@ -560,7 +728,7 @@
             const completedTotal = Object.values(progress).filter(v => v === true).length;
             const msgDiv = document.getElementById('congratsMessage');
             if (completedTotal === 15) {
-                msgDiv.innerHTML = '🎉✨ ПОЗДРАВЛЯЕМ! Ты настоящий СУПЕРГЕРОЙ безопасности! Все 15 звёзд собраны! ✨🎉';
+                msgDiv.innerHTML = `🎉✨ Поздравляю, ${childName}! Ты настоящий СУПЕРГЕРОЙ безопасности! Все 15 звёзд собраны! ✨🎉`;
                 msgDiv.classList.add('finish-celebrate');
                 createBigConfetti();
             } else {
@@ -614,7 +782,11 @@
             } catch(e) { console.log("audio error"); }
         }
 
-        window.onload = init;
+        // init вызывается через startGame() после ввода имени
+        document.addEventListener('DOMContentLoaded', () => {
+            const inp = document.getElementById('nameInput');
+            if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') startGame(); });
+        });
     </script>
 </body>
 </html>
